@@ -202,11 +202,13 @@
 //     }
 // }
 
-import patient.PatientService;
+import allocation.AllocationService;
+import java.util.Scanner;
 import model.Patient;
 import model.Severity;
-
-import java.util.Scanner;
+import patient.PatientService;
+import threading.AllocationWorker;
+import threading.PatientThread;
 
 public class Main {
 
@@ -214,6 +216,13 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         PatientService service = new PatientService();
+
+        AllocationService allocationService = new AllocationService();
+
+        Thread worker = new Thread(new AllocationWorker(allocationService));
+
+        worker.setDaemon(true);
+        worker.start();
 
         int choice=0;
 
@@ -257,8 +266,12 @@ public class Main {
                         );
 
                         if (p != null) {
-                            System.out.println("Patient ID: " + p.getPatientId());
-                        }
+                        System.out.println("Patient ID: " + p.getPatientId());
+
+                        Thread patientThread = new Thread(new PatientThread(p, allocationService));
+
+                         patientThread.start();
+                         }
                         break;
 
                     case 2:
