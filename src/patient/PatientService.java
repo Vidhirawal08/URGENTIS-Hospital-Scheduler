@@ -8,7 +8,7 @@ import java.util.ArrayList;
 //vidhi(2510990452)
 public class PatientService {
 
-    private PatientDAO patientDAO = new PatientDAO();
+    private final PatientDAO patientDAO = new PatientDAO();
 
     // Register Patient
     public Patient registerPatient(String name, int age,
@@ -34,14 +34,13 @@ public class PatientService {
 
         int generatedId = patientDAO.addPatient(patient);
 
-if (generatedId != -1) {
+        if (generatedId != -1) {
 
-    patient.setPatientId(generatedId);
+            patient.setPatientId(generatedId);
 
-    System.out.println("Patient registered successfully!");
-    System.out.println("Patient ID: " + generatedId);
+            System.out.println("Patient registered successfully!");
 
-    return patient;
+            return patient;
 }
 
 System.out.println("Patient registration failed!");
@@ -63,8 +62,6 @@ return null;
         return patientDAO.getPatientById(patientId);
     }
 
-    // Update Patient Status
-    // Update Patient Status
 public boolean updatePatientStatus(int patientId, String status) {
 
     if (patientId <= 0) {

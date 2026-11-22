@@ -11,3 +11,20 @@ CREATE TABLE IF NOT EXISTS patients (
     status VARCHAR(30) DEFAULT 'WAITING',
     arrival_time DATETIME NOT NULL
 );
+
+USE urgentis;
+
+-- DOCTORS TABLE
+CREATE TABLE IF NOT EXISTS doctors (
+    doctor_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100) NOT NULL,
+    availability BOOLEAN DEFAULT TRUE
+);
+
+-- BEDS TABLE
+CREATE TABLE IF NOT EXISTS beds (
+    bed_id INT PRIMARY KEY AUTO_INCREMENT,
+    bed_type VARCHAR(50) NOT NULL,
+    status VARCHAR(20) DEFAULT 'AVAILABLE'
+);
