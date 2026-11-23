@@ -1,6 +1,3 @@
-// Surbhi - 2510991335
-
-// Surbhi - 2510991335
 package threading;
 
 import allocation.AllocationService;
@@ -23,11 +20,10 @@ public class AllocationWorker implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
 
             try {
-
                 Patient patient = queue.getNextPatient();
 
                 boolean allocated =
-                    allocationService.allocatePatient(patient);
+                        allocationService.allocatePatient(patient);
 
                 if (!allocated) {
 
@@ -40,9 +36,12 @@ public class AllocationWorker implements Runnable {
 
                 Thread.currentThread().interrupt();
                 break;
+
+            } catch (Exception e) {
+
+                System.out.println("Worker Error: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
 }
-
-// Surbhi - 2510991335
