@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 //vidhi(2510990452)
 public class DBConnection {
 
@@ -13,7 +14,9 @@ public class DBConnection {
 
     private static final String PASSWORD = "vidhi";
 
-    public static Connection getConnection() {
+    private static boolean messageShown = false;
+
+    public static synchronized Connection getConnection() {
 
         try {
 
@@ -21,18 +24,20 @@ public class DBConnection {
                 URL, USER, PASSWORD
             );
 
-            System.out.println("MySQL Connected Successfully!");
+            if (!messageShown) {
+                System.out.println("MySQL Connected Successfully!");
+                messageShown = true;
+            }
 
             return connection;
 
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
 
             System.out.println("Database Connection Failed!");
 
-        e.printStackTrace();
+            e.printStackTrace();
 
-        return null;
+            return null;
+        }
     }
-}
 }
