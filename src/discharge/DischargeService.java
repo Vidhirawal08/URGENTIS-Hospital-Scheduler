@@ -19,24 +19,24 @@ public class DischargeService {
 
         String findAllocation =
                 "SELECT allocation_id, doctor_id, bed_id FROM allocations "
-              + "WHERE patient_id = ? AND status = 'ACTIVE'";
+            + "WHERE patient_id = ? AND status = 'ACTIVE'";
 
         String completeAllocation =
                 "UPDATE allocations SET status = 'COMPLETED', "
-              + "discharge_time = CURRENT_TIMESTAMP "
-              + "WHERE allocation_id = ?";
+            + "discharge_time = CURRENT_TIMESTAMP "
+            + "WHERE allocation_id = ?";
 
         String updatePatient =
                 "UPDATE patients SET status = 'DISCHARGED' "
-              + "WHERE patient_id = ?";
+            + "WHERE patient_id = ?";
 
         String updateBed =
                 "UPDATE beds SET status = 'AVAILABLE' "
-              + "WHERE bed_id = ?";
+            + "WHERE bed_id = ?";
 
         String updateDoctor =
                 "UPDATE doctors SET availability = TRUE "
-              + "WHERE doctor_id = ?";
+            + "WHERE doctor_id = ?";
 
         try (Connection con = DBConnection.getConnection()) {
 
